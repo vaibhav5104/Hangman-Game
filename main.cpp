@@ -2,16 +2,16 @@
 #include <string>
 using namespace std;
 
-    string hidden_words[7]{
+string hidden_words[8]{
+        "grape",
         "towel",
         "zebra",
-        "chile",
+        "india",
         "mango",
-        "cloth",
+        "vebus",
         "light",
-        "house",
+        "paper",
     };
-
 
     void fail1(){
         cout<<"  :         "<<endl;
@@ -65,16 +65,18 @@ using namespace std;
 
 class Hangman {
 private:
-        string hidden_word = "grape";
+        string hidden_word = hidden_words[0];
         int n = hidden_word.length();
         int i;
-
         int p = 0;
         char attempt = '1';
         char key,opt;
     char latter[5] = {'_','_','_','_','_'};
+    
 
 public:
+        int j = 0;
+
 
 
     void setX(string str){
@@ -85,7 +87,7 @@ public:
         attempt = this->attempt ;
     }
 
-    void introduce() {
+    void introduce1() {
         cout << "  *       *    * * * * *    *       *    *********    *       *    * * * * *    *       *    ---------"<<endl;
         cout << "  *       *    *       *    * *     *    *            * *   * *    *       *    * *     *    :        :"<<endl;
         cout << "  * * * * *    * * * * *    *   *   *    *    ****    *   *   *    * * * * *    *   *   *    :        0"<<endl;
@@ -93,8 +95,18 @@ public:
         cout << "  *       *    *       *    *       *    *********    *       *    *       *    *       *    :       / \\  "<<endl;
         cout << "                                                                                             :"<<endl;
         cout << "                                                                                           ========"<<endl;
+    }
+
+    void introduce2(){
         cout<<"Guess a hidden Word having five alphabet "<<endl<<endl;
-        cout<<"Hint --> "<<"It is a green colored fruit"<<endl<<endl;
+        if(hidden_word == hidden_words[0]) cout<<"Hint --> "<<"It is a green colored fruit"<<endl<<endl;
+        else if(hidden_word == hidden_words[1]) cout<<"Hint --> "<<"Used to dry the body after the bath"<<endl<<endl;
+        else if(hidden_word == hidden_words[2]) cout<<"Hint --> "<<"It's an animal with black and white stripes"<<endl<<endl;
+        else if(hidden_word == hidden_words[3]) cout<<"Hint --> "<<"country of himalayas and ganges"<<endl<<endl;
+        else if(hidden_word == hidden_words[4]) cout<<"Hint --> "<<"Known as king of fruits"<<endl<<endl;
+        else if(hidden_word == hidden_words[5]) cout<<"Hint --> "<<"second planet of solar system"<<endl<<endl;
+        else if(hidden_word == hidden_words[6]) cout<<"Hint --> "<<"fastest thing of universe"<<endl<<endl;
+        else if(hidden_word == hidden_words[7]) cout<<"Hint --> "<<"made of wood and used for writing"<<endl<<endl;
         cout<<"!!!You Will Get Five Attempts!!!"<<endl<<endl;
     }
 
@@ -114,11 +126,13 @@ public:
     }
     
     void searching(string hidden_word,char attempt){
+        // introduce2();
         
     switch (attempt){
 case '1':
 
         process(p,key,i);
+        
         
         if (p == 1) {
         cout << key << " is found in hidden word" << endl;
@@ -149,7 +163,7 @@ case '1':
     }
 
     } else {
-        cout <<"Sorry,"<< key << " is not present in hidden word "<< endl;
+        cout <<"Sorry man ,"<< key << " is not present in hidden word "<< endl;
         fail1();
         for (size_t i = 0; i < 5; i++)
         {
@@ -165,6 +179,7 @@ case '1':
 
     case '2':
         process(p,key,i);
+        
         if (p == 1) {
         cout << key << " is found in hidden word" << endl;
         latter[i] = key;
@@ -211,6 +226,7 @@ case '1':
 
     case '3':
         process(p,key,i);
+        
         if (p == 1) {
         cout << key << " is found in hidden word" << endl;
         latter[i] = key;
@@ -232,11 +248,11 @@ case '1':
     if (p == 1) {
         searching( "grape",'3');
     } else {
-        cout <<"Hurray! You found the word"<< endl;
+        cout <<"HURRAY!!! YOU FOUND THE WORD."<< endl;
                 choise(latter);
     }
     } else {
-        cout <<"Sorry,"<< key << " is not present in hidden word "<< endl;
+        cout <<"Sorry man ,"<< key << " is not present in hidden word "<< endl;
         fail3();
         for (size_t i = 0; i < 5; i++)
         {
@@ -253,6 +269,7 @@ case '1':
 
     case '4':
         process(p,key,i);
+        
 
         if (p == 1) {
         cout << key << " is found in hidden word" << endl;
@@ -275,7 +292,7 @@ case '1':
     if (p == 1) {
         searching( "grape",'4');
     } else {
-        cout <<"Hurray! You found the word"<< endl;
+        cout <<"HURRAY!!! YOU FOUND THE WORD"<< endl;
                 choise(latter);
                 
     }
@@ -298,6 +315,7 @@ case '1':
 
     case '5':
         process(p,key,i);
+        
 
         if (p == 1) {
         cout << key << " is found in hidden word" << endl;
@@ -323,8 +341,6 @@ case '1':
     } else {
         cout <<"Hurray! You found the word"<< endl;
         choise(latter);
-
-
     }
         
         
@@ -336,7 +352,7 @@ case '1':
             cout<<"  "<<latter[i];
         }
         cout<<endl;
-        cout<<"The word was grape"<<endl;
+        cout<<"The word was "<<hidden_words[j]<<endl;
                 choise(latter);
 
 
@@ -360,16 +376,18 @@ case '1':
         for(int i = 0; i < 5; i++) {
             latter[i] = '_';  // Resetting the latter array
         }
+        j++;
+        // cout<<j<<endl;
+        hidden_word = hidden_words[j];
+        introduce2();
+         
         this->searching(hidden_word, attempt);
     } else  {
-        cout << "Thank you for playing this game :)" << endl;
+        cout << "Thank you for playing this game :)";
     }
 }
-
-
-
     };
-    
+
 int main() {
 
     string hidden_word;
@@ -378,8 +396,8 @@ int main() {
     five_latter_word.setX(hidden_word);
     five_latter_word.setAttempt(attempt);
 
-    five_latter_word.introduce();
-
+    five_latter_word.introduce1();
+    five_latter_word.introduce2();
     five_latter_word.searching(hidden_word,attempt);
 
     return 0;

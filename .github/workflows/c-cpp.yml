@@ -1,0 +1,29 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up C++ compiler
+        uses: actions/setup-cpp@v1
+        with:
+          compiler: gcc
+
+      - name: Install dependencies
+        run: sudo apt-get install -y make g++
+
+      - name: Build
+        run: g++ -o hangman main.cpp
+
+      - name: Run Tests
+        run: ./hangman
